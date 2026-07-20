@@ -256,3 +256,18 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+# 自动安装 fixtures
+# Custom Field: 新增的字段
+# Property Setter: 新增的字段属性
+# Client Script: 新增的客户端脚本
+# Server Script: 新增的服务器脚本或打印格式等
+fixtures = [
+    {
+        "dt": "Custom Field",
+        "filters": [["dt", "in", ["Sales Order", "Sales Order Item"]]],
+    },
+    {
+        "dt": "Property Setter",
+        "filters": [["doc_type", "in", ["Sales Order", "Sales Order Item"]]],
+    }
+]
