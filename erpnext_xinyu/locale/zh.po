@@ -1,0 +1,63 @@
+#: erpnext/stock/doctype/item/item.json
+msgid "Serial Nos / Batches"
+msgstr "序列号/批次"
+
+#: erpnext/stock/doctype/batch/batch.js:77
+msgid "No stock available for this batch."
+msgstr "此批次暂无库存。"
+
+#: Sales Order Customization
+msgid "XY Shipping"
+msgstr "运输"
+
+msgid "Pallet Type"
+msgstr "托盘类型"
+
+msgid "pt_none"
+msgstr "无"
+
+msgid "pt_common"
+msgstr "普通"
+
+msgid "pt_cp2"
+msgstr "CP2"
+
+msgid "pt_cp3"
+msgstr "CP3"
+
+msgid "pt_plastic"
+msgstr "塑料"
+
+msgid "Transport Mode"
+msgstr "运输方式"
+
+msgid "Sea Freight"
+msgstr "海运"
+
+msgid "Air Freight"
+msgstr "空运"
+
+msgid "Destination Port"
+msgstr "目的港"
+
+msgid "Shipment Type"
+msgstr "装运类型"
+
+msgid "Container Type"
+msgstr "集装箱类型"
+
+#: Sales Order Item Customization
+msgid "Quality Grade"
+msgstr "质量等级"
+
+msgid "Packaging Type"
+msgstr "包装类型"
+
+msgid "Common Drum"
+msgstr "普通桶"
+
+msgid "UN Drum"
+msgstr "UN桶"
+
+msgid "Bag Packaging"
+msgstr "袋装"
