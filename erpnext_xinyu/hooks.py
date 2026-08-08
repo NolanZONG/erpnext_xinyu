@@ -269,5 +269,9 @@ fixtures = [
     {
         "dt": "Property Setter",
         "filters": [["doc_type", "in", ["Sales Order", "Sales Order Item"]]],
+    },
+    {
+        "dt": "Client Script",
+        "filters": [["dt", "in", ["Sales Order", "Sales Order Item"]]],
     }
 ]
