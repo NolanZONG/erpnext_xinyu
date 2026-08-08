@@ -86,7 +86,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "erpnext_xinyu.install.before_install"
-# after_install = "erpnext_xinyu.install.after_install"
+after_install = "erpnext_xinyu.install.after_install"
 
 # Uninstallation
 # ------------
