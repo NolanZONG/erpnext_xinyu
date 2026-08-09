@@ -7,6 +7,12 @@ msgid "No stock available for this batch."
 msgstr "此批次暂无库存。"
 
 #: Sales Order Customization
+msgid "XY Parties"
+msgstr "相关方"
+
+msgid "XY Destination Country"
+msgstr "国家"
+
 msgid "XY Shipping"
 msgstr "运输"
 

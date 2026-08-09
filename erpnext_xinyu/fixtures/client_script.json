@@ -1,0 +1,13 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Order",
+  "enabled": 1,
+  "modified": "2026-08-09 08:35:28.519692",
+  "module": "ERPNext Xinyu",
+  "name": "Sales_Order_Parties_Display",
+  "script": "frappe.ui.form.on('Sales Order', {\n    custom_consignee_(frm) {\n        erpnext_xinyu_render_address(frm, 'custom_consignee_', 'custom_consignee_detail');\n    },\n    custom_notify_party(frm) {\n        erpnext_xinyu_render_address(frm, 'custom_notify_party', 'custom_notify_party_detail');\n    }\n})\n\nfunction erpnext_xinyu_render_address(frm, address_field, display_field) {\n    if (!frm.doc[address_field]) {\n        frm.set_value(display_field, '');\n        return;\n    }\n    frappe.call({\n        method: 'frappe.contacts.doctype.address.address.get_address_display',\n        args: { address_dict: frm.doc[address_field] },\n        callback: function (r) {\n            let html = (r.message || '')\n                .replace(/\\s*<br\\s*\\/?>\\s*/gi, '<br>')\n                .replace(/(?:<br>){2,}/gi, '<br>')\n                .replace(/^(?:<br>)+|(?:<br>)+$/gi, '');\n            frm.set_value(display_field, html);\n        }\n    });\n}",
+  "view": "Form"
+ }
+]
