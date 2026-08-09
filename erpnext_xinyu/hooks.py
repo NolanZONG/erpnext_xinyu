@@ -264,11 +264,11 @@ after_install = "erpnext_xinyu.install.after_install"
 fixtures = [
     {
         "dt": "Custom Field",
-        "filters": [["dt", "in", ["Sales Order", "Sales Order Item"]]],
+        "filters": [["dt", "in", ["Sales Order", "Sales Order Item", "Item"]]],
     },
     {
         "dt": "Property Setter",
-        "filters": [["doc_type", "in", ["Sales Order", "Sales Order Item"]]],
+        "filters": [["doc_type", "in", ["Sales Order", "Sales Order Item", "Item"]]],
     },
     {
         "dt": "Client Script",
