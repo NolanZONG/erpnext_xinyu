@@ -1,0 +1,59 @@
+import frappe
+from frappe.utils import flt
+
+
+def calculate_custom_amounts(doc, method=None):
+	"""Authoritative calculation for Xinyu custom pricing fields on Sales Order.
+
+	Runs on validate so values are correct regardless of entry point
+	(desk UI, REST API, data import, programmatic creation). The client
+	script mirrors these formulas only for live feedback while editing.
+	"""
+	# conversion_rate: base (company currency) = transaction * conversion_rate,
+	# so converting company currency -> transaction currency divides by it.
+	conversion_rate = flt(doc.conversion_rate) or 1.0
+
+	total_difference = 0.0
+
+	for row in doc.items or []:
+		customs_rate = flt(row.custom_customs_rate)
+		commission_rate = flt(row.custom_commission_rate)
+		factory_rate = flt(row.custom_factory_rate)
+		qty = flt(row.qty)
+
+		rebate_rate = 0.0
+		if row.item_code:
+			rebate_rate = flt(
+				frappe.db.get_value("Item", row.item_code, "custom_tax_rebate_rate")
+			)
+
+		excl_commission_rate = customs_rate - commission_rate
+		excl_commission_amount = excl_commission_rate * qty
+		customs_amount = customs_rate * qty
+		commission_amount = commission_rate * qty
+
+		vat = factory_rate * 0.9
+		tax = vat / 1.13 * (rebate_rate / 100.0)
+		exw = (factory_rate - tax) / conversion_rate if conversion_rate else 0.0
+		insurance = exw * 1.1 * 0.001
+		quote = exw + insurance
+		quote_with_credit_term = quote * 1.006
+		approved_amount = quote_with_credit_term * qty
+		difference = excl_commission_amount - approved_amount
+
+		row.custom_customs_excl_commission_rate = excl_commission_rate
+		row.custom_customs_excl_commission_amount = excl_commission_amount
+		row.custom_customs_amount = customs_amount
+		row.custom_commission_amount = commission_amount
+		row.custom_vat = vat
+		row.custom_tax = tax
+		row.custom_exw = exw
+		row.custom_insurance = insurance
+		row.custom_quote = quote
+		row.custom_quote_with_credit_term = quote_with_credit_term
+		row.custom_approved_amount = approved_amount
+		row.custom_difference = difference
+
+		total_difference += difference
+
+	doc.custom_total_difference = total_difference

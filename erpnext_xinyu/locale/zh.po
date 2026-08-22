@@ -67,3 +67,43 @@ msgstr "UN桶"
 
 msgid "Bag Packaging"
 msgstr "袋装"
+
+#: Sales Order Item Pricing Customization
+msgid "Customs Rate"
+msgstr "报关单价"
+
+msgid "Factory Rate"
+msgstr "出厂单价"
+
+msgid "Commission Rate"
+msgstr "佣金单价"
+
+msgid "Customs Rate Excl. Commission"
+msgstr "不含佣金单价"
+
+msgid "Customs Amount Excl. Commission"
+msgstr "不含佣金总额"
+
+msgid "Customs Amount"
+msgstr "报关总额"
+
+msgid "Commission Amount"
+msgstr "佣金总额"
+
+msgid "Insurance"
+msgstr "保费"
+
+msgid "Quote"
+msgstr "报价"
+
+msgid "Quote with Credit Term"
+msgstr "有账期报价"
+
+msgid "Approved Amount"
+msgstr "过审总额"
+
+msgid "Difference"
+msgstr "差额"
+
+msgid "Total Difference"
+msgstr "差额总额"
