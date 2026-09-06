@@ -9,10 +9,7 @@ def calculate_custom_amounts(doc, method=None):
 	(desk UI, REST API, data import, programmatic creation). The client
 	script mirrors these formulas only for live feedback while editing.
 	"""
-	# conversion_rate: base (company currency) = transaction * conversion_rate,
-	# so converting company currency -> transaction currency divides by it.
 	conversion_rate = flt(doc.conversion_rate) or 1.0
-
 	total_difference = 0.0
 
 	for row in doc.items or []:
@@ -27,19 +24,46 @@ def calculate_custom_amounts(doc, method=None):
 				frappe.db.get_value("Item", row.item_code, "custom_tax_rebate_rate")
 			)
 
-		excl_commission_rate = customs_rate - commission_rate
-		excl_commission_amount = excl_commission_rate * qty
-		customs_amount = customs_rate * qty
-		commission_amount = commission_rate * qty
+		excl_commission_rate = flt(
+			customs_rate - commission_rate,
+			row.precision("custom_customs_excl_commission_rate"),
+		)
+		excl_commission_amount = flt(
+			excl_commission_rate * qty,
+			row.precision("custom_customs_excl_commission_amount"),
+		)
+		customs_amount = flt(
+			customs_rate * qty,
+			row.precision("custom_customs_amount"),
+		)
+		commission_amount = flt(
+			commission_rate * qty,
+			row.precision("custom_commission_amount"),
+		)
 
-		vat = factory_rate * 0.9
-		tax = vat / 1.13 * (rebate_rate / 100.0)
-		exw = (factory_rate - tax) / conversion_rate if conversion_rate else 0.0
-		insurance = exw * 1.1 * 0.001
-		quote = exw + insurance
-		quote_with_credit_term = quote * 1.006
-		approved_amount = quote_with_credit_term * qty
-		difference = excl_commission_amount - approved_amount
+		vat = flt(factory_rate * 0.9, row.precision("custom_vat"))
+		tax = flt(
+			vat / 1.13 * (rebate_rate / 100.0),
+			row.precision("custom_tax"),
+		)
+		exw = flt(
+			(factory_rate - tax) / conversion_rate if conversion_rate else 0.0,
+			row.precision("custom_exw"),
+		)
+		insurance = flt(exw * 1.1 * 0.001, row.precision("custom_insurance"))
+		quote = flt(exw + insurance, row.precision("custom_quote"))
+		quote_with_credit_term = flt(
+			quote * 1.006,
+			row.precision("custom_quote_with_credit_term"),
+		)
+		approved_amount = flt(
+			quote_with_credit_term * qty,
+			row.precision("custom_approved_amount"),
+		)
+		difference = flt(
+			excl_commission_amount - approved_amount,
+			row.precision("custom_difference"),
+		)
 
 		row.custom_customs_excl_commission_rate = excl_commission_rate
 		row.custom_customs_excl_commission_amount = excl_commission_amount
@@ -56,4 +80,7 @@ def calculate_custom_amounts(doc, method=None):
 
 		total_difference += difference
 
-	doc.custom_total_difference = total_difference
+	doc.custom_total_difference = flt(
+		total_difference,
+		doc.precision("custom_total_difference"),
+	)

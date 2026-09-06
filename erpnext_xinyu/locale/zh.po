@@ -52,6 +52,27 @@ msgstr "装运类型"
 msgid "Container Type"
 msgstr "集装箱类型"
 
+msgid "Shipping Fee Domestic"
+msgstr "运费(国内段)"
+
+msgid "Shipping Fee Oversea"
+msgstr "运费(海外段)"
+
+msgid "Shipping Fee Total"
+msgstr "总运费"
+
+msgid "Total Difference"
+msgstr "差额总额"
+
+msgid "Evaluation Result"
+msgstr "系统评估结果"
+
+msgid "er_success"
+msgstr "通过"
+
+msgid "er_fail"
+msgstr "失败"
+
 #: Sales Order Item Customization
 msgid "Quality Grade"
 msgstr "质量等级"
@@ -105,5 +126,4 @@ msgstr "过审总额"
 msgid "Difference"
 msgstr "差额"
 
-msgid "Total Difference"
-msgstr "差额总额"
+
