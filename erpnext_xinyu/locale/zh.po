@@ -52,6 +52,9 @@ msgstr "装运类型"
 msgid "Container Type"
 msgstr "集装箱类型"
 
+msgid "Shipping Fowarder"
+msgstr "货运代理"
+
 msgid "Shipping Fee Domestic"
 msgstr "运费(国内段)"
 
@@ -79,6 +82,15 @@ msgstr "质量等级"
 
 msgid "Packaging Type"
 msgstr "包装类型"
+
+msgid "Unit Package Weight"
+msgstr "单包重量"
+
+msgid "Package Count"
+msgstr "包装个数"
+
+msgid "Total Package Count"
+msgstr "总包装个数"
 
 msgid "Common Drum"
 msgstr "普通桶"

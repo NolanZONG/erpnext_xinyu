@@ -148,7 +148,10 @@ after_install = "erpnext_xinyu.install.after_install"
 
 doc_events = {
     "Sales Order": {
-        "validate": "erpnext_xinyu.overrides.sales_order.calculate_custom_amounts",
+        "validate": [
+            "erpnext_xinyu.overrides.sales_order.calculate_custom_amounts",
+            "erpnext_xinyu.overrides.sales_order.calculate_packaging_counts",
+        ],
     }
 }
 

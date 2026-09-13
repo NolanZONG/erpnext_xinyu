@@ -1,6 +1,22 @@
 import frappe
-from frappe.utils import flt
+from frappe.utils import ceil, flt
 
+def calculate_packaging_counts(doc, method=None):
+	"""Authoritative calculation for Xinyu packaging count fields on Sales Order.
+
+	Runs on validate so values are correct regardless of entry point
+	(desk UI, REST API, data import, programmatic creation). The client
+	script mirrors these formulas only for live feedback while editing.
+	"""
+	total = 0
+
+	for row in doc.items or []:
+		qty = flt(row.qty)
+		weight = flt(row.custom_unit_package_weight)
+		row.custom_package_count = ceil(qty / weight) if weight > 0 else 0
+		total += row.custom_package_count
+
+	doc.custom_total_package_count = total
 
 def calculate_custom_amounts(doc, method=None):
 	"""Authoritative calculation for Xinyu custom pricing fields on Sales Order.
