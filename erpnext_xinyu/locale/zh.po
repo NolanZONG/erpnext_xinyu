@@ -150,3 +150,37 @@ msgstr "销售订单备注"
 
 msgid "Pick List Remark"
 msgstr "拣货单备注"
+
+#: Item Customization
+msgid "Item Name En"
+msgstr "产品名称（英文）"
+
+msgid "Appearance EN"
+msgstr "外观（英文）"
+
+msgid "Appearance CN"
+msgstr "外观（中文）"
+
+msgid "XY Appearance"
+msgstr "外观"
+
+msgid "Commodity Inspection"
+msgstr "商检"
+
+msgid "Declaration Code"
+msgstr "报送码"
+
+msgid "XY Package"
+msgstr "包装"
+
+msgid "Inner Packaging"
+msgstr "内包装"
+
+msgid "Inner Packaging Method"
+msgstr "内包装方式"
+
+msgid "Outer Packaging"
+msgstr "外包装"
+
+msgid "Outer Packaging Dimensions"
+msgstr "外包装尺寸"
