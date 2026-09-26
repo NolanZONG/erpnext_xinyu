@@ -273,11 +273,11 @@ doc_events = {
 fixtures = [
     {
         "dt": "Custom Field",
-        "filters": [["dt", "in", ["Sales Order", "Sales Order Item", "Item"]]],
+        "filters": [["dt", "in", ["Sales Order", "Sales Order Item", "Item", "Pick List", "Pick List Item"]]],
     },
     {
         "dt": "Property Setter",
-        "filters": [["doc_type", "in", ["Sales Order", "Sales Order Item", "Item"]]],
+        "filters": [["doc_type", "in", ["Sales Order", "Sales Order Item", "Item", "Pick List", "Pick List Item"]]],
     },
     {
         "dt": "Client Script",
