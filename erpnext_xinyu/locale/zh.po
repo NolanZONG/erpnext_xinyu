@@ -138,4 +138,15 @@ msgstr "过审总额"
 msgid "Difference"
 msgstr "差额"
 
+#: Pick List Customization
+msgid "Shipping Mark"
+msgstr "唛头批号"
 
+msgid "XY Remark"
+msgstr "备注"
+
+msgid "Sales Order Remark"
+msgstr "销售订单备注"
+
+msgid "Pick List Remark"
+msgstr "拣货单备注"
