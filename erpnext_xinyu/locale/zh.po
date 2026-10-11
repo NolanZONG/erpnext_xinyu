@@ -76,6 +76,9 @@ msgstr "通过"
 msgid "er_fail"
 msgstr "失败"
 
+msgid "Is Advanced TT"
+msgstr "是否前TT付款(选择付款条款后自动判断, 无需手动勾选)"
+
 #: Sales Order Item Customization
 msgid "Quality Grade"
 msgstr "质量等级"

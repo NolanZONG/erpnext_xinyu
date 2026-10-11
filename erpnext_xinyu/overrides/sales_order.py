@@ -1,22 +1,5 @@
 import frappe
-from frappe.utils import ceil, flt
-
-def calculate_packaging_counts(doc, method=None):
-	"""Authoritative calculation for Xinyu packaging count fields on Sales Order.
-
-	Runs on validate so values are correct regardless of entry point
-	(desk UI, REST API, data import, programmatic creation). The client
-	script mirrors these formulas only for live feedback while editing.
-	"""
-	total = 0
-
-	for row in doc.items or []:
-		qty = flt(row.qty)
-		weight = flt(row.custom_unit_package_weight)
-		row.custom_package_count = ceil(qty / weight) if weight > 0 else 0
-		total += row.custom_package_count
-
-	doc.custom_total_package_count = total
+from frappe.utils import flt
 
 def calculate_custom_amounts(doc, method=None):
 	"""Authoritative calculation for Xinyu custom pricing fields on Sales Order.
@@ -100,3 +83,9 @@ def calculate_custom_amounts(doc, method=None):
 		total_difference,
 		doc.precision("custom_total_difference"),
 	)
+
+
+def set_is_advanced_tt(doc, method=None):
+	"""Derive custom_is_advanced_tt from the selected payment terms."""
+	terms = (doc.get("custom_payment_terms") or "").upper()
+	doc.custom_is_advanced_tt = 1 if "ADVANCE" in terms else 0
