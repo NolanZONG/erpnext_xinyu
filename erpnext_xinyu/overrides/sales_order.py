@@ -83,3 +83,9 @@ def calculate_custom_amounts(doc, method=None):
 		total_difference,
 		doc.precision("custom_total_difference"),
 	)
+
+
+def set_is_advanced_tt(doc, method=None):
+	"""Derive custom_is_advanced_tt from the selected payment terms."""
+	terms = (doc.get("custom_payment_terms") or "").upper()
+	doc.custom_is_advanced_tt = 1 if "ADVANCE" in terms else 0

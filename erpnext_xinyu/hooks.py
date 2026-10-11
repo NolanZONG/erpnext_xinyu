@@ -150,6 +150,7 @@ doc_events = {
     "Sales Order": {
         "validate": [
             "erpnext_xinyu.overrides.sales_order.calculate_custom_amounts",
+            "erpnext_xinyu.overrides.sales_order.set_is_advanced_tt",
         ],
     },
     "Pick List": {

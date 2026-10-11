@@ -42,5 +42,16 @@
   "name": "Pick_List_Item_Packaging",
   "script": "frappe.ui.form.on('Pick List', {\n    refresh(frm) {\n        if (frm.doc.docstatus !== 0) {\n            return;\n        }\n        (frm.doc.locations || []).forEach(function (row) {\n            erpnext_xinyu_pl_calc_packaging_row(frm, row.doctype, row.name, true);\n        });\n        erpnext_xinyu_pl_calc_packaging_total(frm);\n    }\n});\n\nfrappe.ui.form.on('Pick List Item', {\n    custom_unit_package_weight(frm, cdt, cdn) {\n        erpnext_xinyu_pl_calc_packaging_row(frm, cdt, cdn);\n    },\n    qty(frm, cdt, cdn) {\n        erpnext_xinyu_pl_calc_packaging_row(frm, cdt, cdn);\n    },\n    locations_remove(frm) {\n        erpnext_xinyu_pl_calc_packaging_total(frm);\n    }\n});\n\nfunction erpnext_xinyu_pl_calc_packaging_row(frm, cdt, cdn, skip_total) {\n    const row = locals[cdt][cdn];\n    if (!row) {\n        return;\n    }\n\n    const qty = flt(row.qty);\n    const weight = flt(row.custom_unit_package_weight);\n    const package_count = weight > 0 ? Math.ceil(qty / weight) : 0;\n\n    erpnext_xinyu_pl_set_packaging_row_value(cdt, cdn, 'custom_package_count', package_count);\n\n    if (!skip_total) {\n        erpnext_xinyu_pl_calc_packaging_total(frm);\n    }\n}\n\nfunction erpnext_xinyu_pl_set_packaging_row_value(cdt, cdn, fieldname, value) {\n    const rounded = cint(value);\n    if (cint(locals[cdt][cdn][fieldname]) !== rounded) {\n        frappe.model.set_value(cdt, cdn, fieldname, rounded);\n    }\n}\n\nfunction erpnext_xinyu_pl_calc_packaging_total(frm) {\n    let total = 0;\n    (frm.doc.locations || []).forEach(function (row) {\n        total += cint(row.custom_package_count);\n    });\n    total = cint(total);\n    if (cint(frm.doc.custom_total_package_count) !== total) {\n        frm.set_value('custom_total_package_count', total);\n    }\n}",
   "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Order",
+  "enabled": 1,
+  "modified": "2026-10-11 17:15:00",
+  "module": "ERPNext Xinyu",
+  "name": "Sales_Order_Advance_TT",
+  "script": "frappe.ui.form.on('Sales Order', {\n    custom_payment_terms(frm) {\n        const terms = (frm.doc.custom_payment_terms || '').toUpperCase();\n        frm.set_value('custom_is_advanced_tt', terms.includes('ADVANCE') ? 1 : 0);\n    }\n});",
+  "view": "Form"
  }
 ]
