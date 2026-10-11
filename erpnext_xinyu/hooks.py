@@ -150,9 +150,12 @@ doc_events = {
     "Sales Order": {
         "validate": [
             "erpnext_xinyu.overrides.sales_order.calculate_custom_amounts",
-            "erpnext_xinyu.overrides.sales_order.calculate_packaging_counts",
         ],
-    }
+    },
+    "Pick List": {
+        "validate": "erpnext_xinyu.overrides.pick_list.calculate_packaging_counts",
+        "before_save": "erpnext_xinyu.overrides.pick_list.calculate_packaging_counts",
+    },
 }
 
 # Scheduled Tasks
@@ -281,6 +284,6 @@ fixtures = [
     },
     {
         "dt": "Client Script",
-        "filters": [["dt", "in", ["Sales Order", "Sales Order Item"]]],
+        "filters": [["dt", "in", ["Sales Order", "Sales Order Item", "Pick List"]]],
     }
 ]
